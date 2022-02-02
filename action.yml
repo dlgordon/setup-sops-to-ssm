@@ -1,0 +1,10 @@
+name: setup-gh
+description: Setup sops-to-ssm on Github Action
+inputs:
+  version:
+    description: Version of SOPS to SSM to install
+    required: false
+    default: 0.0.2
+runs:
+  using: node12
+  main: dist/index.js
