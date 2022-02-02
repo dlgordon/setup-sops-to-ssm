@@ -5,7 +5,6 @@ require('./sourcemap-register.js');module.exports =
 /***/ 932:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-const path = __webpack_require__(622);
 const core = __webpack_require__(186);
 const tc = __webpack_require__(784);
 const { getDownloadObject } = __webpack_require__(918);
@@ -26,8 +25,8 @@ async function setup() {
     core.notice(`Extracted sops-to-ssm to ${pathToCLI}`)
 
     // Expose the tool by adding it to the PATH
-    core.addPath(path.join(pathToCLI, download.binPath));
-    core.setOutput('toolpath', path.join(pathToCLI, download.binPath))
+    core.addPath(pathToCLI);
+    core.setOutput('toolpath', pathToCLI)
   } catch (e) {
     core.setFailed(e);
   }
@@ -46,7 +45,6 @@ if (require.main === require.cache[eval('__filename')]) {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 const os = __webpack_require__(87);
-const path = __webpack_require__(622);
 
 // arch in [arm, x32, x64...] (https://nodejs.org/api/os.html#os_os_arch)
 // return value in [amd64, 386, arm]
@@ -73,11 +71,10 @@ function getDownloadObject(version) {
   const platform = os.platform();
   const filename = `sops-to-ssm_${ version }_${ mapOS(platform) }_${ mapArch(os.arch()) }`;
   const extension = platform === 'win32' ? 'zip' : 'tar.gz';
-  const binPath = platform === 'win32' ? 'bin' : path.join(filename, 'bin');
   const url = `https://github.com/dlgordon/sops-to-ssm/releases/download/v${ version }/${ filename }.${ extension }`;
   return {
-    url,
-    binPath
+    url
+    
   };
 }
 
