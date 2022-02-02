@@ -25,6 +25,7 @@ async function setup() {
 
     // Expose the tool by adding it to the PATH
     core.addPath(path.join(pathToCLI, download.binPath));
+    core.setOutput('toolpath', path.join(pathToCLI, download.binPath))
   } catch (e) {
     core.setFailed(e);
   }
